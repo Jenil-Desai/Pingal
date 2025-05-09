@@ -14,5 +14,39 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
+  id      String    @id @default(uuid())
+  email   String
+  website Website[]
+}
+
+model Website {
+  id     String        @id @default(uuid())
+  url    String
+  userId String
+  user   User          @relation(fields: [userId], references: [id])
+  ticks  WebsiteTick[]
+}
+
+model Validator {
+  id        String        @id @default(uuid())
+  publicKey String
+  location  String
+  ip        String
+  ticks     WebsiteTick[]
+}
+
+model WebsiteTick {
+  id          String        @id @default(uuid())
+  websiteId   String
+  website     Website       @relation(fields: [websiteId], references: [id])
+  validatorId String
+  Validator   Validator     @relation(fields: [validatorId], references: [id])
+  createdAt   DateTime
+  status      WebsiteStatus
+  latency     Float
+}
+
+enum WebsiteStatus {
+  Good
+  Bad
 }
