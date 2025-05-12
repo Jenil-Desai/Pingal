@@ -2,7 +2,7 @@ import express from "express";
 import apiRouter from "@/routes/api";
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
