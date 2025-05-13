@@ -30,7 +30,7 @@ export function useWebsites() {
         throw new Error('Failed to fetch websites');
       }
 
-      const data = await response.data.websites;
+      const data = await response.data;
       setWebsites(data);
     } catch (error) {
       logger.error('Error fetching websites:', error);

@@ -29,7 +29,7 @@ export default function AddWebsiteDialog({ onOpenChange, refreshWebsites }: AddW
   async function onSubmit(data: AddWebsiteType) {
     const token = await getToken();
     try {
-      const response = await axios.post(`${process.env.BASE_API_URL}/website`, data,
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/website`, data,
         {
           headers: {
             "Content-Type": "application/json",

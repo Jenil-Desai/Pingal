@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { LayoutDashboard, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -45,7 +46,25 @@ export default function Navbar() {
               </Link>
             </SignedOut>
             <SignedIn>
-              <UserButton />
+              <UserButton showName appearance={{
+                elements: {
+                  userButtonBox: {
+                    display: "flex",
+                    alignItems: "center",
+                    marginLeft: "8px",
+                    marginRight: "8px",
+                    color: "white",
+                  },
+                  userButtonAvatarBox: {
+                    width: "32px",
+                    height: "32px"
+                  }
+                }
+              }}>
+                <UserButton.MenuItems>
+                  <UserButton.Action label={"Dashboard"} labelIcon={<LayoutDashboard size={14} />} onClick={() => router.push("/dashboard")} />
+                </UserButton.MenuItems>
+              </UserButton>
             </SignedIn>
           </div>
 
@@ -62,7 +81,7 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-card/95 backdrop-blur-lg">
           <div className="px-5 py-4 border-t border-white/10">
-            <div className="flex flex-col space-y-3">
+            <div className="flex flex-col items-center space-y-3">
               <SignedOut>
                 <Link href="/login">
                   <Button variant="outline" className="border-pingal-lavender text-pingal-lavender hover:bg-pingal-lavender/10">
@@ -76,7 +95,25 @@ export default function Navbar() {
                 </Link>
               </SignedOut>
               <SignedIn>
-                <UserButton />
+                <UserButton showName appearance={{
+                  elements: {
+                    userButtonBox: {
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "8px",
+                      marginRight: "8px",
+                      color: "white",
+                    },
+                    userButtonAvatarBox: {
+                      width: "32px",
+                      height: "32px"
+                    }
+                  }
+                }}>
+                  <UserButton.MenuItems>
+                    <UserButton.Action label={"Dashboard"} labelIcon={<LayoutDashboard size={14} />} onClick={() => router.push("/dashboard")} />
+                  </UserButton.MenuItems>
+                </UserButton>
               </SignedIn>
             </div>
           </div>
