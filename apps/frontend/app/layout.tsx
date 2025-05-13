@@ -1,10 +1,9 @@
-import Navbar from "@/components/global/navigationbar/Navbar";
-import type { Metadata } from "next";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/global/footer/Footer";
+import Navbar from "@/components/global/navigationbar/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Pingal - Decentralized Uptime Monitoring",
