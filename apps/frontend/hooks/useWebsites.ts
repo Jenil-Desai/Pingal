@@ -3,12 +3,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { logger } from "@repo/logger";
 
+export interface Website {
+  id: string;
+  name: string;
+  url: string;
+  ticks: {
+    id: string;
+    createdAt: string;
+    status: string;
+    latency: number;
+  }[];
+}
+
 export function useWebsites() {
   const { getToken } = useAuth();
-  const [websites, setWebsites] = useState([]);
+  const [websites, setWebsites] = useState<Website[]>([]);
   const [loading, setLoading] = useState(true);
 
-  async function fetchWebsites() {
+  async function refreshWebsites() {
     try {
       setLoading(true);
       const token = await getToken();
@@ -28,14 +40,14 @@ export function useWebsites() {
   }
 
   useEffect(() => {
-    fetchWebsites();
+    refreshWebsites();
 
     const interval = setInterval(() => {
-      fetchWebsites();
+      refreshWebsites();
     }, 10000 * 60 * 1);
 
     return () => clearInterval(interval);
   }, []);
 
-  return { websites, loading };
+  return { websites, loading, refreshWebsites };
 }
