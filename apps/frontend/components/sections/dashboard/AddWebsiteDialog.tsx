@@ -33,7 +33,7 @@ export default function AddWebsiteDialog({ onOpenChange, refreshWebsites }: AddW
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
           },
         }
       );

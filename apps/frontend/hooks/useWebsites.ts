@@ -24,7 +24,7 @@ export function useWebsites() {
     try {
       setLoading(true);
       const token = await getToken();
-      const response = await axios.get(`${process.env.BASE_API_URL}/website/list`, { headers: { Authorization: `Bearer ${token}` } })
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/website/list`, { headers: { Authorization: `${token}` } })
 
       if (response.status != 200) {
         throw new Error('Failed to fetch websites');
