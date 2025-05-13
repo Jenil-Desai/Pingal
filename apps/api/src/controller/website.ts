@@ -65,6 +65,9 @@ export const websiteListController = async (req: Request, res: Response) => {
       userId,
       disabled: false,
     },
+    include: {
+      ticks: true,
+    }
   });
 
   res.json(websites);

@@ -1,94 +1,81 @@
 "use client";
-
 import { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Activity, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pingal-blue to-pingal-purple p-[1px]">
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-background">
-                <Activity className="h-4 w-4 text-pingal-neon" />
-              </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-pingal-background/80 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="h-8 w-8 bg-gradient-to-br from-pingal-lavender to-pingal-neon rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">P</span>
             </div>
-            <span className="hidden font-bold text-xl sm:inline-block bg-gradient-to-r from-pingal-blue via-pingal-purple to-pingal-pink bg-clip-text text-transparent">
-              Pingal
-            </span>
+            <span className="text-white font-bold text-xl">Pingal</span>
           </Link>
-        </div>
 
-        <div className="flex items-center gap-4">
-          <SignedOut>
-            <div className="hidden md:flex items-center gap-4">
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="border-pingal-purple/30 bg-background hover:bg-accent hover:text-accent-foreground"
-                >
-                  Login
-                </Button>
-              </Link>
-
-              <Link href="/register">
-                <Button className="bg-gradient-to-r from-pingal-blue to-pingal-purple hover:opacity-90 transition-opacity">
-                  Register
-                </Button>
-              </Link>
-            </div>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
-        </div>
-      </div>
-
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="container py-4 grid gap-4">
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             <SignedOut>
-              <div className="flex flex-col gap-2 pt-4">
-                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                  <Button
-                    variant="outline"
-                    className="w-full border-pingal-purple/30 bg-background hover:bg-accent hover:text-accent-foreground"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/register" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full bg-gradient-to-r from-pingal-blue to-pingal-purple hover:opacity-90 transition-opacity">
-                    Register
-                  </Button>
-                </Link>
-              </div>
+              <Link href="/login">
+                <Button variant="outline" className="border-pingal-lavender text-pingal-lavender hover:bg-pingal-lavender/10">
+                  Log in
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button className="bg-gradient-to-r from-pingal-lavender to-pingal-neon text-white hover:opacity-90 btn-glow">
+                  Sign up
+                </Button>
+              </Link>
             </SignedOut>
             <SignedIn>
               <UserButton />
             </SignedIn>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <Button variant="ghost" onClick={toggleMobileMenu}>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-card/95 backdrop-blur-lg">
+          <div className="px-5 py-4 border-t border-white/10">
+            <div className="flex flex-col space-y-3">
+              <SignedOut>
+                <Link href="/login">
+                  <Button variant="outline" className="border-pingal-lavender text-pingal-lavender hover:bg-pingal-lavender/10">
+                    Log in
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button className="bg-gradient-to-r from-pingal-lavender to-pingal-neon text-white hover:opacity-90 btn-glow">
+                    Sign up
+                  </Button>
+                </Link>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
+          </div>
         </div>
       )}
-    </header>
+    </nav>
   );
-}
+};
