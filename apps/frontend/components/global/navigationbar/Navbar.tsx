@@ -4,13 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const showNavbar = pathname === "/";
+
+  if (!showNavbar) return null;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-pingal-background/80 backdrop-blur-md border-b border-white/10">
@@ -34,7 +40,7 @@ export default function Navbar() {
               </Link>
               <Link href="/register">
                 <Button className="bg-gradient-to-r from-pingal-lavender to-pingal-neon text-white hover:opacity-90 btn-glow">
-                  Sign up
+                  Register
                 </Button>
               </Link>
             </SignedOut>
@@ -65,7 +71,7 @@ export default function Navbar() {
                 </Link>
                 <Link href="/register">
                   <Button className="bg-gradient-to-r from-pingal-lavender to-pingal-neon text-white hover:opacity-90 btn-glow">
-                    Sign up
+                    Register
                   </Button>
                 </Link>
               </SignedOut>

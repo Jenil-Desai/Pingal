@@ -1,6 +1,13 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const showNavbar = pathname === "/";
+
+  if (!showNavbar) return null;
+
   return (
     <footer className="bg-pingal-background/50 backdrop-blur-sm border-t border-white/5 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
