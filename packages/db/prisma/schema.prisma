@@ -31,11 +31,12 @@ model Website {
 }
 
 model Validator {
-  id        String        @id @default(uuid())
-  publicKey String
-  location  String
-  ip        String
-  ticks     WebsiteTick[]
+  id             String        @id @default(uuid())
+  publicKey      String
+  location       String
+  ip             String
+  pendingPayment Int           @default(0)
+  ticks          WebsiteTick[]
 }
 
 model WebsiteTick {
@@ -44,7 +45,7 @@ model WebsiteTick {
   website     Website       @relation(fields: [websiteId], references: [id])
   validatorId String
   Validator   Validator     @relation(fields: [validatorId], references: [id])
-  createdAt   DateTime
+  createdAt   DateTime      @default(now())
   status      WebsiteStatus
   latency     Float
 }
