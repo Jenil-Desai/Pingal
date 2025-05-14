@@ -1,6 +1,7 @@
 import type { OutgoingMessage, SignupOutgoingMessage, ValidatorOutgoingMessage } from "@repo/common";
 import { Keypair } from "@solana/web3.js";
 import { signMessage } from "./utils";
+import { randomUUIDv7 } from "bun";
 
 const CALLBACKS: { [callbackId: string]: (data: SignupOutgoingMessage) => void } = {};
 let validatorId: string | null = null;
@@ -28,6 +29,24 @@ async function main() {
         await validateHandler(ws, message.data, keypair);
       }
     }
+  }
+
+  ws.onopen = async () => {
+    const callbackId = randomUUIDv7();
+    CALLBACKS[callbackId] = (data: SignupOutgoingMessage) => {
+      validatorId = data.validatorId;
+    }
+    const signedMessage = await signMessage(`Signed message for ${callbackId}, ${keypair.publicKey}`, keypair);
+
+    ws.send(JSON.stringify({
+      type: 'signup',
+      data: {
+        callbackId,
+        ip: await fetch('https://api.ipify.org').then(res => res.text()),
+        publicKey: keypair.publicKey,
+        signedMessage,
+      },
+    }));
   }
 }
 
