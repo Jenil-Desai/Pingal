@@ -23,7 +23,7 @@ Bun.serve({
 
       switch (type) {
         case "signup": {
-          const verfied = await verifyMessage(``, data.data.publicKey, data.data.signature);
+          const verfied = await verifyMessage(`Signed message for ${data.data.callbackId}, ${data.data.publicKey}`, data.data.publicKey, data.data.signature);
 
           if (verfied) {
             await signupHandler(ws, data.data);
@@ -107,9 +107,17 @@ setInterval(async () => {
         }
       }))
 
-      CALLBACKS[callbackId] = async (data) => {
+      CALLBACKS[callbackId] = async (data: IncomingMessage) => {
         if (data.type === "validate") {
-          const { status, latency, websiteId, validatorId } = data.data;
+          const { status, latency, websiteId, validatorId, signedMessage } = data.data;
+          const verified = await verifyMessage(
+            `Replying to ${callbackId}`,
+            validator.publicKey,
+            signedMessage
+          );
+          if (!verified) {
+            return;
+          }
 
           await prismaClient.$transaction(async (tx) => {
             await tx.websiteTick.create({

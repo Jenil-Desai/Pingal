@@ -16,6 +16,7 @@ export interface ValidatorIncomingMessage {
   callbackId: string
   latency: number
   websiteId: string
+  signedMessage: string;
 }
 
 export interface ValidatorOutgoingMessage {

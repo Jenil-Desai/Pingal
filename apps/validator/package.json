@@ -8,5 +8,13 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@solana/kit": "^2.1.1",
+    "@solana/web3.js": "^1.98.2",
+    "axios": "^1.9.0",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1",
+    "@repo/common": "*"
   }
 }
