@@ -1,84 +1,154 @@
-# Turborepo starter
+# 🟢 Pingal - Decentralized Uptime Monitoring
 
-This Turborepo starter is maintained by the Turborepo core team.
+**Pingal** is a decentralized uptime monitoring solution designed to provide resilient, real-time service monitoring through a distributed network of verification nodes. Whether you're running a personal blog, a SaaS application, or critical Web3 infrastructure, Pingal ensures your services remain transparent, trackable, and secure—without relying on a single point of failure.
 
-## Using this example
+> Built for reliability, backed by decentralization.
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## 📑 Table of Contents
 
-## What's inside?
+1. [Overview](#-overview)
+2. [Tech Stack](#-tech-stack)
+3. [Packages & Libraries](#-packages--libraries)
+4. [Getting Started](#-getting-started)
+5. [Setup](#-setup)
+6. [Features](#-features)
+7. [Demo & Screenshots](#-demo--screenshots)
+8. [Acknowledgments](#-acknowledgments)
+9. [License](#-license)
 
-This Turborepo includes the following packages/apps:
+---
 
-### Apps and Packages
+## 🌟 Overview
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Pingal aims to reimagine uptime monitoring through decentralization and blockchain integration. Instead of centralized pinging services, Pingal relies on a distributed model, ensuring enhanced trust, auditability, and uptime transparency.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Key benefits:
+- Reduces reliance on a single infrastructure
+- Empowers users with ownership and visibility
+- Built with modern, scalable architecture and a Web3-friendly ethos
 
-### Utilities
+---
 
-This Turborepo has some additional tools already setup for you:
+## 🧠 Tech Stack
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+| Layer        | Tech Stack                       |
+|--------------|----------------------------------|
+| Frontend     | Next.js, Typescript, Tailwind CSS |
+| Backend      | Node.js (Bun runtime), Express    |
+| Auth         | Clerk (Frontend & Backend)        |
+| Database     | PostgreSQL with Prisma ORM        |
+| Web3 / Crypto| Solana, TweetNaCl, Svix           |
+| Monorepo     | Turborepo                         |
 
-### Build
+---
 
-To build all apps and packages, run the following command:
+## 📦 Packages & Libraries
 
-```
-cd my-turborepo
-pnpm build
-```
+| Category | Package | Purpose |
+|----------|---------|---------|
+| **Backend** | `express` | Web application framework |
+| | `cors` | Cross-Origin Resource Sharing middleware |
+| | `dotenv` | Environment variable management |
+| | `axios` | HTTP client for API requests |
+| | `jsonwebtoken` | JWT authentication |
+| | `@clerk/express` | Authentication middleware |
+| | `svix` | Webhook verification |
+| | `@solana/web3.js` | Solana blockchain interaction |
+| | `tweetnacl` | Cryptographic operations |
+| | `tweetnacl-util` | Utilities for TweetNaCl |
+| **Frontend** | `@clerk/nextjs` | Authentication for Next.js |
+| | `@clerk/themes` | UI theming for Clerk |
+| | `@clerk/types` | TypeScript definitions |
+| | `react-hook-form` | Form management |
+| | `@hookform/resolvers` | Form validation integration |
+| | `zod` | Schema validation |
+| | `next-themes` | Theme management for Next.js |
+| | `axios` | HTTP client for API requests |
+| **Dev & ORM** | `@prisma/client` | Database client |
+| | `prisma` | ORM for database operations |
+| | `turborepo` | Monorepo management |
+| | `bun` | JavaScript/TypeScript runtime |
 
-### Develop
+---
 
-To develop all apps and packages, run the following command:
+## 🚀 Getting Started
 
-```
-cd my-turborepo
-pnpm dev
-```
+> Prerequisites:
+- Bun
+- Node.js (if not using Bun exclusively)
+- PostgreSQL
+- Git
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+## ⚙️ Setup
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Jenil-Desai/Pingal.git
+   ```
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+2. Navigate into the directory:
 
-```
-cd my-turborepo
-npx turbo login
-```
+   ```bash
+   cd pingal
+   ```
+3. Open in your preferred IDE (VS Code, WebStorm, or Zed)
+4. Install dependencies:
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+   ```bash
+   bun install   # Or pnpm/yarn/npm as applicable
+   ```
+5. Run the project:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+   ```bash
+   bun run dev
+   ```
 
-```
-npx turbo link
-```
+---
 
-## Useful Links
+## 🎯 Features
 
-Learn more about the power of Turborepo:
+* 🌍 **Decentralized Uptime Monitoring**
+  Monitor websites via distributed nodes for resilient reliability
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+* 🔐 **User Authentication & Authorization**
+  Secure login/register using Clerk with role-based access
+
+* ➕ **Add Website Monitoring**
+  Easily add websites to be pinged
+
+* 📈 **Real-Time Status**
+  Get instant availability feedback from multiple nodes
+
+* 📜 **Monitoring History**
+  View past uptime/downtime
+
+* 🖥️ **Modern UI/UX Dashboard**
+  Built with Shadcn UI and Tailwind for responsive, clean experience
+
+---
+
+## 📸 Demo & Screenshots
+
+*To be added.*
+
+---
+
+## 🙏 Acknowledgments
+
+1. [Harkirat Singh – Web3 SaaS YouTube Project](https://www.youtube.com/@harkiratsingh)
+2. [Shadcn UI Documentation](https://ui.shadcn.dev/)
+3. [Bun WebSocket Docs](https://bun.sh/docs/api/websocket)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+> Pingal – Decentralize uptime. Maximize reliability.
